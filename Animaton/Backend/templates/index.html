@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'Manga_Info/css/style.css' %}">
+    <title>Manga Info</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class = 'tete'>
+             <h1 >le teste</h1>
+            </div>
+        </div>
+    </header>
+   
+
+        
+
+          
+        </div>
+    
+
+    <main>
+        <div class="container">
+            <h2>Les Top Anime</h2>
+            <div class="anime-list">
+                {% if top_anime_data %}
+                    {% for anime in top_anime_data.data %}
+                        <div class="anime-item">
+                            <img src="{{ anime.images.jpg.large_image_url }}" alt="{{ anime.title }}">
+                            <div class="anime-details">
+                                <h3>{{ anime.title }}</h3>
+                                <p><strong>Type:</strong> {{ anime.type }}</p>
+                                <p><strong>Statut:</strong> {{ anime.status }}</p>
+                                <p><strong>Nombre d'épisodes:</strong> {{ anime.episodes }}</p>
+                                <p><strong>Synopsis:</strong> {{ anime.synopsis }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Aucune donnée sur les meilleurs animes disponible pour le moment.</p>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('.menu li a');
+        
+            links.forEach(link => {
+                link.addEventListener('click', smoothScroll);
+            });
+        
+            function smoothScroll(e) {
+                e.preventDefault();
+        
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+        
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+        
+    <script/>
