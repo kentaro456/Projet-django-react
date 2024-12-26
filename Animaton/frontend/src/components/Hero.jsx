@@ -24,13 +24,14 @@ const Hero = () => {
   ];
 
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(true); // Start with muted audio
   const [isAudioLoaded, setIsAudioLoaded] = useState(false);
   const audioRef = useRef(null);
   const videoContainerRef = useRef(null);
   const heroCanvasRef = useRef(null);
 
   useEffect(() => {
+    // Change the video every VIDEO_INTERVAL milliseconds
     const interval = setInterval(() => {
       setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
     }, VIDEO_INTERVAL);
@@ -53,7 +54,13 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    // Basic Three.js setup
+    // Automatically play audio and ensure it's unmuted when the component mounts
+    if (audioRef.current) {
+      audioRef.current.muted = false; // Unmute by default
+      audioRef.current.play().catch((err) => console.error("Audio play failed:", err));
+    }
+
+    // Basic Three.js setup for particles and camera
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 0, 5);
@@ -62,12 +69,12 @@ const Hero = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     heroCanvasRef.current.appendChild(renderer.domElement);
 
-    // Lighting
+    // Lighting setup
     const pointLight = new THREE.PointLight(0xffcc00, 1, 10);
     pointLight.position.set(2, 3, 4);
     scene.add(pointLight);
 
-    // Particles
+    // Particle system setup
     const particlesGeometry = new THREE.BufferGeometry();
     const particlesCount = 5000;
     const positions = new Float32Array(particlesCount * 3);
@@ -80,21 +87,19 @@ const Hero = () => {
 
     const particlesMaterial = new THREE.PointsMaterial({
       color: 0xffcc00,
-      size: 0.02, // Reduced size for smaller particles
+      size: 0.02, // Smaller particles
       transparent: true,
-      opacity: 0.7, // Adjust transparency for a more subtle effect
+      opacity: 0.7, // Slightly transparent particles
     });
 
     const particles = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particles);
 
-    // Animation
+    // Animation loop
     const clock = new THREE.Clock();
     const animate = () => {
       const elapsedTime = clock.getElapsedTime();
-
-      // Animate particles
-      particles.rotation.y = elapsedTime * 0.1;
+      particles.rotation.y = elapsedTime * 0.1; // Rotate particles
 
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
@@ -102,7 +107,7 @@ const Hero = () => {
 
     animate();
 
-    // Handle resize
+    // Handle resizing
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
