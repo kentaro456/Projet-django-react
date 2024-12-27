@@ -20,9 +20,9 @@ const TopMediaComponent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-       const animeResponse = axios.get('http://127.0.0.1:8000/api/top/anime/');
+       const animeResponse = axios.get('http://127.0.0.1:8000/api/top-anime/');
         const mangaResponse = axios.get('http://127.0.0.1:8000/api/top/manga/');
-        const charactersResponse = axios.get('http://127.0.0.1:8000/api/top/characters/');
+       const charactersResponse = axios.get('http://127.0.0.1:8000/api/top/characters/');
         const recommendationsResponse = axios.get('http://127.0.0.1:8000/api/recommendations/anime/');
 
         const [animeResult, mangaResult, charactersResult, recommendationsResult] = await Promise.all([animeResponse, mangaResponse, charactersResponse, recommendationsResponse]);

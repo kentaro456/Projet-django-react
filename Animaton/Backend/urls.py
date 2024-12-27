@@ -1,5 +1,19 @@
-from django.urls import path
+from django.urls import include, path
 from Backend import views
+from rest_framework.routers import DefaultRouter
+from .views import CategoryViewSet, QuestionViewSet, OptionViewSet, TournamentViewSet, RoundViewSet, MatchViewSet, VoteViewSet
+
+
+
+# Créer un routeur pour l'API
+router = DefaultRouter()
+router.register(r'categories', CategoryViewSet)
+router.register(r'questions', QuestionViewSet)
+router.register(r'options', OptionViewSet)
+router.register(r'tournaments', TournamentViewSet)
+router.register(r'rounds', RoundViewSet)
+router.register(r'matches', MatchViewSet)
+router.register(r'votes', VoteViewSet)
 
 urlpatterns = [
     path('',views.index, name = 'index'),
@@ -10,4 +24,5 @@ urlpatterns = [
     path('api/recommendations/anime/', views.recommendations_anime_view, name='recommendations_anime'),
     path('api/recherche/', views.search, name='search'),
     path('api/schedule/', views.get_schedule, name='get_schedule'),
+    path('api/', include(router.urls)),
 ]

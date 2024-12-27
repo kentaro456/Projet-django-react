@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Backend',
     'corsheaders',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -106,13 +107,17 @@ WSGI_APPLICATION = 'Animaton.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# change ici la bdd 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',  # Utilisation de MySQL
+        'NAME': 'anime',  # Nom de votre base de données MySQL
+        'USER': 'root',  # Nom d'utilisateur MySQL
+        'PASSWORD': '',  # Mot de passe de votre utilisateur MySQL
+        'HOST': 'localhost',  # Hôte (localhost si MySQL est sur la même machine)
+        'PORT': '3306',  # Port par défaut de MySQL (vous pouvez le changer si nécessaire)
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
