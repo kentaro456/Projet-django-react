@@ -1,7 +1,8 @@
 from django.urls import include, path
 from Backend import views
 from django.contrib import admin
-from question.views import *
+from musique import views as musique_views
+from question import views as question_views
 from rest_framework.routers import DefaultRouter
 from .views import CategoryViewSet, QuestionViewSet, OptionViewSet, TournamentViewSet, RoundViewSet, MatchViewSet, VoteViewSet
 
@@ -18,8 +19,10 @@ router.register(r'matches', MatchViewSet)
 router.register(r'votes', VoteViewSet)
 
 urlpatterns = [
-    path('', ReactView.as_view(), name="any"),
-    path('import_data/', import_data, name='import_data'),
+    path('import_data_music/', musique_views.import_data, name="import_data_music" ),
+    path('music/', musique_views.ReactView.as_view(), name="music"),
+    path('question/', question_views.ReactView.as_view(), name="question"),
+    path('import_data_question/', question_views.import_data, name='import_data_question'),
     path('i/',views.index, name = 'index'),
     
     path('api/top-anime/', views.top_anime_view, name='top_anime_view'),

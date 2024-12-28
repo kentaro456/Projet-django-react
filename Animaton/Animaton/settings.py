@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'question',
+    'musique',
 ]
 
 MIDDLEWARE = [
@@ -113,7 +114,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.mysql',  # Utilisation de MySQL
+        #'ENGINE': 'django.db.backends.mysql',  # Utilisation de MySQL
         'NAME': 'anime',  # Nom de votre base de données MySQL
         'USER': 'root',  # Nom d'utilisateur MySQL
         'PASSWORD': '',  # Mot de passe de votre utilisateur MySQL
@@ -162,6 +163,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/dist')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+MEDIA_URL = '/media/'  # URL de base pour accéder aux fichiers médias
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

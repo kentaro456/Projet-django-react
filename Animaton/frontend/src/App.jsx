@@ -16,6 +16,7 @@ const About = lazy(() => import('./components/About'));
 const Jeu = lazy(() => import('./components/Jeu'));
 const Tournoi = lazy(() => import('./components/Tournoi'));
 const QuizSimple = lazy(() => import('./components/QuizComponent/question'));
+const QuizMusic = lazy(() => import('./components/QuizComponent/musique'));
 
 // Création d'une instance QueryClient
 const queryClient = new QueryClient();
@@ -140,6 +141,15 @@ const App = () => {
                       <>
                         <ScrollToTopAndSetTitle title="Quiz" />
                         <QuizSimple />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="/Quiz/music"
+                    element={
+                      <>
+                        <ScrollToTopAndSetTitle title="Quiz Music" />
+                        <QuizMusic />
                       </>
                     }
                   />

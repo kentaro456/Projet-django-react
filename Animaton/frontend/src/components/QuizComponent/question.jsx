@@ -14,7 +14,7 @@ function QuizApp() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/");
+        const response = await axios.get("http://127.0.0.1:8000/question/");
         const data = response.data;
 
         if (
@@ -92,7 +92,7 @@ function QuizApp() {
       setCurrentQuestionIndex(nextIndex);
       generateChoices(questions[nextIndex], answers);
     } else {
-      alert(`Quiz terminé ! Votre score est de ${score}/${questions.length}`);
+      alert(`Quiz terminé ! Votre score est de ${score+1}/${questions.length}`);
     }
   };
 

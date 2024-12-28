@@ -95,13 +95,20 @@ const GamesSection = () => {
     },
     {
       id: 2,
+      nom: "Quiz OST",
+      description: "Mettez vos connaissances à l'épreuve en devinant les animes à partir de leurs openings. Un défi musical pour les vrais fans !",
+      image: "https://api.triviacreator.com/v1/imgs/quiz/Png-5eccea28-0663-4d48-b785-9ba8a1e3738b.png",
+      link: "/Quiz/music",
+    },
+    {
+      id: 3,
       nom: "Guess the Character",
       description: "Un jeu de devinettes passionnant où vous devrez identifier les personnages d'anime à partir d'indices visuels et textuels.",
       image: "/img/minecraft.jpg",
       link: "/CharatereQuizz",
     },
     {
-      id: 3,
+      id: 4,
       nom: "Tournoi Anime",
       description: "Participez à un tournoi épique où vos animes préférés s'affrontent. Votez et influencez le résultat final !",
       image: "https://i.ytimg.com/vi/ysCDmxObe8o/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBbyajyMPOiST6S_vhz3ncZ99ElnA",
