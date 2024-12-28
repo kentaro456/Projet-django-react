@@ -5,10 +5,10 @@ const Jeu = () => {
   const jeux = [
     {
       id: 1,
-      nom: "BliendTest",
+      nom: "BlindTest",
       description: "Trouver les anime à partir des openings.",
       image: "/img/league_of_legends.jpg",
-      link: "#", // Link for the specific game
+      link: "/Quiz/simple", // Link for the specific game
     },
     {
       id: 2,
