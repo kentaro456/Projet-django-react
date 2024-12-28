@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import CharacterQuiz from './components/CharacterQuiz';
 
 // Composants chargés de manière paresseuse
 const Hero = lazy(() => import('./components/Hero'));
@@ -139,6 +140,15 @@ const App = () => {
                       <>
                         <ScrollToTopAndSetTitle title="Quiz" />
                         <QuizSimple />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="/CharatereQuizz"
+                    element={
+                      <>
+                        <ScrollToTopAndSetTitle title="QuizCharaterer" />
+                        <CharacterQuiz />
                       </>
                     }
                   />

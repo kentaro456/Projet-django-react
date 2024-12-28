@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaArrowLeft } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const SearchResultsPage = () => {
   const navigate = useNavigate();
@@ -83,7 +84,11 @@ const SearchResultsPage = () => {
 
         {loading && !error && (
           <div className="flex justify-center p-4">
-            <div className="animate-spin w-10 h-10 border-4 border-yellow-400 border-t-transparent rounded-full"></div>
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              className="w-10 h-10 border-4 border-yellow-400 border-t-transparent rounded-full"
+            />
           </div>
         )}
 
@@ -97,11 +102,13 @@ const SearchResultsPage = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {animeResults.map((anime) => (
-            <div
+            <motion.div
               key={anime.id}
               className="bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all hover:bg-gray-700 cursor-pointer transform hover:scale-105"
               onClick={() => navigate(`/anime/${anime.id}`)}
               aria-label={`Voir les détails de ${anime.title}`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               <img
                 src={anime.image_url}
@@ -113,7 +120,7 @@ const SearchResultsPage = () => {
                 <h4 className="text-white font-semibold text-lg">{anime.title}</h4>
                 <p className="text-xs text-gray-400 mt-2 line-clamp-2">{anime.synopsis}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -126,6 +133,9 @@ const SearchResultsPage = () => {
             >
               Page précédente
             </button>
+            <span className="text-gray-400">
+              Page {page} de {Math.ceil(totalResults / 50)}
+            </span>
             <button
               onClick={handleNextPage}
               disabled={animeResults.length < 50}
