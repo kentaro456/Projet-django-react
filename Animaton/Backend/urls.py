@@ -1,5 +1,7 @@
 from django.urls import include, path
 from Backend import views
+from django.contrib import admin
+from question.views import *
 from rest_framework.routers import DefaultRouter
 from .views import CategoryViewSet, QuestionViewSet, OptionViewSet, TournamentViewSet, RoundViewSet, MatchViewSet, VoteViewSet
 
@@ -16,7 +18,9 @@ router.register(r'matches', MatchViewSet)
 router.register(r'votes', VoteViewSet)
 
 urlpatterns = [
-    path('',views.index, name = 'index'),
+    path('', ReactView.as_view(), name="any"),
+    path('import_data/', import_data, name='import_data'),
+    path('i/',views.index, name = 'index'),
     
     path('api/top-anime/', views.top_anime_view, name='top_anime_view'),
     path('api/top/manga/', views.top_manga_view, name='top_manga'),

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questions d'anime :</title>
+</head>
+<body>
+    <h1>Questions d'Anime :</h1>
+    {% for question in questions %}
+    <h2>{dernier}</h2>
+    <ul>
+        <legend>{{question}}</legend>
+        <li><input type="radio" name="" value=""><label for="">{{question}}</label></li>
+        
+    </ul>
+    {% endfor%}
+</body>
+</html>
