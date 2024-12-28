@@ -17,22 +17,71 @@ const TopMediaComponent = () => {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('anime');
 
+  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-       const animeResponse = axios.get('http://127.0.0.1:8000/api/top-anime/');
-        const mangaResponse = axios.get('http://127.0.0.1:8000/api/top/manga/');
-       const charactersResponse = axios.get('http://127.0.0.1:8000/api/top/characters/');
-        const recommendationsResponse = axios.get('http://127.0.0.1:8000/api/recommendations/anime/');
+        const cachedAnime = localStorage.getItem('topAnime');
+        const cachedManga = localStorage.getItem('topManga');
+        const cachedCharacters = localStorage.getItem('topCharacters');
+        const cachedRecommendations = localStorage.getItem('topRecommendations');
 
-        const [animeResult, mangaResult, charactersResult, recommendationsResult] = await Promise.all([animeResponse, mangaResponse, charactersResponse, recommendationsResponse]);
+        if (cachedAnime) {
+          setTopAnime(JSON.parse(cachedAnime));
+        } else {
+          try {
+            const animeResponse = await axios.get('http://127.0.0.1:8000/api/top-anime/');
+            setTopAnime(animeResponse.data.data || []);
+            localStorage.setItem('topAnime', JSON.stringify(animeResponse.data.data));
+          } catch (err) {
+            console.error("Erreur lors de la récupération des données d'anime :", err);
+          }
+        }
 
-        setTopAnime(animeResult.data.data || []);
-        setTopManga(mangaResult.data.data || []);
-        setTopCharacters(charactersResult.data.data || []);
-        setTopRecommendations(recommendationsResult.data.data || []);
+        await delay(1000); // Délai de 1 seconde
+
+        if (cachedManga) {
+          setTopManga(JSON.parse(cachedManga));
+        } else {
+          try {
+            const mangaResponse = await axios.get('http://127.0.0.1:8000/api/top/manga/');
+            setTopManga(mangaResponse.data.data || []);
+            localStorage.setItem('topManga', JSON.stringify(mangaResponse.data.data));
+          } catch (err) {
+            console.error("Erreur lors de la récupération des données de manga :", err);
+          }
+        }
+
+        await delay(1000); // Délai de 1 seconde
+
+        if (cachedCharacters) {
+          setTopCharacters(JSON.parse(cachedCharacters));
+        } else {
+          try {
+            const charactersResponse = await axios.get('http://127.0.0.1:8000/api/top/characters/');
+            setTopCharacters(charactersResponse.data.data || []);
+            localStorage.setItem('topCharacters', JSON.stringify(charactersResponse.data.data));
+          } catch (err) {
+            console.error("Erreur lors de la récupération des données de personnages :", err);
+          }
+        }
+
+        await delay(1000); // Délai de 1 seconde
+
+        if (cachedRecommendations) {
+          setTopRecommendations(JSON.parse(cachedRecommendations));
+        } else {
+          try {
+            const recommendationsResponse = await axios.get('http://127.0.0.1:8000/api/recommendations/anime/');
+            setTopRecommendations(recommendationsResponse.data.data || []);
+            localStorage.setItem('topRecommendations', JSON.stringify(recommendationsResponse.data.data));
+          } catch (err) {
+            console.error("Erreur lors de la récupération des recommandations :", err);
+          }
+        }
       } catch (err) {
-        console.error("Erreur lors de la récupération des données :", err);
+        console.error("Erreur générale :", err);
         setError("Impossible de récupérer les données. Veuillez réessayer plus tard.");
       } finally {
         setLoading(false);
@@ -237,7 +286,7 @@ const TopMediaComponent = () => {
               className="pb-12"
             >
               {topRecommendations.length > 0 ? (
-                topRecommendations.map((recommendationData) => 
+                topRecommendations.map((recommendationData) =>
                   recommendationData.entry.map((recommendation) => (
                     <SwiperSlide key={recommendation.mal_id}>
                       <MediaCard media={recommendation} />

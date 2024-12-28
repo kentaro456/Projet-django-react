@@ -5,9 +5,9 @@ const Jeu = () => {
   const jeux = [
     {
       id: 1,
-      nom: "BlindTest",
+      nom: "Quiz",
       description: "Trouver les anime à partir des openings.",
-      image: "/img/league_of_legends.jpg",
+      image: "https://api.triviacreator.com/v1/imgs/quiz/Png-5eccea28-0663-4d48-b785-9ba8a1e3738b.png",
       link: "/Quiz/simple", // Link for the specific game
     },
     {
@@ -35,7 +35,7 @@ const Jeu = () => {
           {jeux.map((jeu) => (
             <div
               key={jeu.id}
-              className="bg-gray-700 p-6 rounded-lg shadow-lg hover:bg-gray-600 transition-colors duration-300"
+              className="bg-gray-700 p-6 rounded-lg shadow-lg hover:bg-gray-600 transition-colors duration-300 transform hover:scale-105"
             >
               <img
                 src={jeu.image}
@@ -50,7 +50,7 @@ const Jeu = () => {
                   className={`inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300 ${jeu.link === "#" ? "cursor-not-allowed opacity-50" : ""}`}
                   aria-disabled={jeu.link === "#"}
                 >
-                  {jeu.id === 1 ? "Aller au Tournoi" : "Découvrir"}
+                  {jeu.id === 1 ? "Jouer au quizz" : jeu.id === 3 ? "Jouer au tournoi" : "Découvrir"}
                 </Link>
               </div>
             </div>

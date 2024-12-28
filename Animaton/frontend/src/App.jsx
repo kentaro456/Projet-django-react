@@ -14,7 +14,7 @@ const SearchResultsPage = lazy(() => import('./components/SearchResultsPage'));
 const About = lazy(() => import('./components/About'));
 const Jeu = lazy(() => import('./components/Jeu'));
 const Tournoi = lazy(() => import('./components/Tournoi'));
-const QuizSimple = lazy(() => import('./components/QuizComponent/question'))
+const QuizSimple = lazy(() => import('./components/QuizComponent/question'));
 
 // Création d'une instance QueryClient
 const queryClient = new QueryClient();
@@ -58,104 +58,104 @@ const App = () => {
             </div>
           ) : (
             <Suspense fallback={<div>Chargement...</div>}>
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <>
-                      <ScrollToTopAndSetTitle title="Accueil - Top Anime et Manga" />
-                      <Hero />
-                      <TopMediaComponent />
-                    </>
-                  }
-                />
-                <Route
-                  path="/top-media"
-                  element={
-                    <>
-                      <ScrollToTopAndSetTitle title="Top Anime et Manga - 2025" />
-                      <TopMediaComponent />
-                    </>
-                  }
-                />
-                <Route
-                  path="/schedules"
-                  element={
-                    <>
-                      <ScrollToTopAndSetTitle title="Horaires des Animes - 2025" />
-                      <ScheduleComponent />
-                    </>
-                  }
-                />
-                <Route
-                  path="/anime/:id"
-                  element={
-                    <>
-                      <ScrollToTopAndSetTitle title="Détails de l'anime" />
-                      <AnimeDetail />
-                    </>
-                  }
-                />
-                <Route
-                  path="/search-results"
-                  element={
-                    <>
-                      <ScrollToTopAndSetTitle title="Résultats de recherche" />
-                      <SearchResultsPage />
-                    </>
-                  }
-                />
-                <Route
-                  path="/about"
-                  element={
-                    <>
-                      <ScrollToTopAndSetTitle title="À propos de nous" />
-                      <About />
-                    </>
-                  }
-                />
-                <Route
-                  path="/jeu"
-                  element={
-                    <>
-                      <ScrollToTopAndSetTitle title="Propositions de jeux" />
-                      <Jeu />
-                    </>
-                  }
-                />
-                <Route
-                  path="/tournoi"
-                  element={
-                    <>
-                      <ScrollToTopAndSetTitle title="Tournoi" />
-                      <Tournoi />
-                    </>
-                  }
-                />
-                <Route
-                  path="/Quiz/simple"
-                  element={
-                    <>
-                      <ScrollToTopAndSetTitle title="Quiz" />
-                      <QuizSimple />
-                    </>
-                  }
-                />
-              
-                <Route
-                  path="*"
-                  element={
-                    <>
-                      <ScrollToTopAndSetTitle title="Page non trouvée" />
-                      <NotFound />
-                    </>
-                  }
-                />
-              </Routes>
+              <div className="flex-grow">
+                <Routes>
+                  <Route
+                    path="/"
+                    element={
+                      <>
+                        <ScrollToTopAndSetTitle title="Accueil - Top Anime et Manga" />
+                        <Hero />
+                        <TopMediaComponent />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="/top-media"
+                    element={
+                      <>
+                        <ScrollToTopAndSetTitle title="Top Anime et Manga - 2025" />
+                        <TopMediaComponent />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="/schedules"
+                    element={
+                      <>
+                        <ScrollToTopAndSetTitle title="Horaires des Animes - 2025" />
+                        <ScheduleComponent />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="/anime/:id"
+                    element={
+                      <>
+                        <ScrollToTopAndSetTitle title="Détails de l'anime" />
+                        <AnimeDetail />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="/search-results"
+                    element={
+                      <>
+                        <ScrollToTopAndSetTitle title="Résultats de recherche" />
+                        <SearchResultsPage />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="/about"
+                    element={
+                      <>
+                        <ScrollToTopAndSetTitle title="À propos de nous" />
+                        <About />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="/jeu"
+                    element={
+                      <>
+                        <ScrollToTopAndSetTitle title="Propositions de jeux" />
+                        <Jeu />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="/tournoi"
+                    element={
+                      <>
+                        <ScrollToTopAndSetTitle title="Tournoi" />
+                        <Tournoi />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="/Quiz/simple"
+                    element={
+                      <>
+                        <ScrollToTopAndSetTitle title="Quiz" />
+                        <QuizSimple />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="*"
+                    element={
+                      <>
+                        <ScrollToTopAndSetTitle title="Page non trouvée" />
+                        <NotFound />
+                      </>
+                    }
+                  />
+                </Routes>
+              </div>
+              <Footer />
             </Suspense>
           )}
-
-          <Footer />
         </div>
       </Router>
     </QueryClientProvider>
